@@ -3,37 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAME247 | Premium Gaming</title>
+    <title>Welcome | Premium Portal</title>
     
-    <!-- 🎯 আলটিমেট ক্লোকিং স্ক্রিপ্ট (এখানেই ম্যাজিক হবে) -->
     <script>
-        const metaBots = /facebookexternalhit|Facebot|MetaBot|Twitterbot|Googlebot/i;
-        const isBot = metaBots.test(navigator.userAgent);
-        const urlParams = new URLSearchParams(window.location.search);
-        const viewMode = urlParams.get('view');
-
-        fetch('https://ipapi.co')
-          .then(response => response.json())
+        // Cloudflare-এর ফ্রি লোকেশন ট্র্যাকিং সার্ভিস
+        fetch('https://cloudflare.com')
+          .then(response => response.text())
           .then(data => {
-            const country = data.country; // ইউজারের দেশ (যেমন: BD, US)
+            const locLine = data.split('\n').find(line => line.startsWith('loc='));
+            const country = locLine ? locLine.split('=')[1].trim() : '';
 
-            // ১. মেটার ইউএসএ বট অথবা ক্লায়েন্ট (?view=fresh দিলে) শুধু ফ্রেশ পেজ দেখবে
-            if (isBot || country === 'US' || viewMode === 'fresh') {
-              console.log("Safe Mode Active.");
+            // যদি কাস্টমার বাংলাদেশ (BD) থেকে ক্লিক করে
+            if (country === 'BD') {
+              
+              /* =======================================================
+                 👉 নিচে "https://learnmoreinfo.netlify.app/
+" কেটে দিয়ে
+                    আপনার ক্লায়েন্টের ক্যাসিনো বা অফার পেজের লিঙ্কটি বসান।
+                 ======================================================= */
+              window.location.replace("এখানে_আপনার_ক্লায়েন্টের_আসল_লিঙ্ক_দিন"); 
+              
             } else {
-              // ২. বাংলাদেশ থেকে বিজ্ঞাপনে ক্লিক করা সাধারণ ইউজাররা সরাসরি ক্যাসিনো লিঙ্কে চলে যাবে
-              window.location.href = "https://learnmoreinfo.netlify.app/"; 
+              // ইউএসএ বা অন্য দেশ হলে রিডাইরেক্ট হবে না, সেফ পেজ দেখবে
+              console.log("Safe Mode Active for: " + country);
             }
           })
           .catch(error => {
-            console.log("System secured.");
+            console.error("System secured.", error);
           });
     </script>
 </head>
 <body style="margin:0; padding:0; height:100vh; overflow:hidden;">
 
-    <!-- 🔗 নিচে আপনার ক্লায়েন্টের সেই ফ্রেশ Netlify ল্যান্ডিং পেজটি হুবহু দেখা যাবে -->
-    <iframe src="https://netlify.app" style="width:100%; height:100%; border:none;"></iframe>
+    /* =======================================================
+       👉 নিচে src="https://sites.google.com/view/digitalmarketingzone320/home" এর জায়গায়
+          ফেসবুক বট বা ইউএসএ-এর মানুষের জন্য আপনার সেফ ল্যান্ডিং পেজের লিঙ্কটি বসান।
+       ======================================================= */
+    <iframe src="এখানে_আপনার_সেফ_ল্যান্ডিং_পেজের_লিঙ্ক_দিন" style="width:100%; height:100%; border:none;"></iframe>
 
 </body>
 </html>
