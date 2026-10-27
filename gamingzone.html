@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -46,10 +45,10 @@
         const BANGLADESH_URL = "https://learnmoreinfo.netlify.app/";
 
         try {
-            const response = await fetch("/cdn-cgi/trace", {
+            // 🎯 এখানে ফুল ইউআরএল (https://cloudflare.com) ফিক্স করা হয়েছে যেন গিটহাবেও পারফেক্টলি কাজ করে
+            const response = await fetch("https://cloudflare.com", {
                 method: "GET",
-                cache: "no-store",
-                credentials: "same-origin"
+                cache: "no-store"
             });
 
             if (!response.ok) {
@@ -70,4 +69,3 @@
 
 </body>
 </html>
-```
